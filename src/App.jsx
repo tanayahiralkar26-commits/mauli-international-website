@@ -259,11 +259,16 @@ function Homepage() {
 
       <header className="navbar">
         <a className="brand" href="#home" aria-label="Mauli International home">
-          <span className="brand-symbol">M<span>.</span></span>
-          <span className="brand-name">
-            MAULI<span>INTERNATIONAL</span>
-          </span>
-        </a>
+  <img
+    src="/mauli-logo.png"
+    alt="Mauli International"
+    style={{
+      height: '90px',
+      width: '90px',
+      objectFit: 'contain',
+    }}
+  />
+</a>
 
         <nav>
           <a href="#home">{t('home')}</a>
@@ -554,11 +559,16 @@ function Homepage() {
 
       <footer className="footer">
         <a className="brand footer-brand" href="#home">
-          <span className="brand-symbol">M<span>.</span></span>
-          <span className="brand-name">
-            MAULI<span>INTERNATIONAL</span>
-          </span>
-        </a>
+  <img
+    src="/mauli-logo.png"
+    alt="Mauli International"
+    style={{
+      height: '90px',
+      width: '90px',
+      objectFit: 'contain',
+    }}
+  />
+</a>
         <span>{t('footerText')}</span>
         <a href="#home">{t('backToTop')} ↑</a>
         <span className="copyright">

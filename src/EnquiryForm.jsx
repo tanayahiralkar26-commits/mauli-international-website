@@ -46,23 +46,42 @@ export default function EnquiryForm() {
     }
 
     try {
-      const { error } = await supabase
-        .from('quote_enquiries')
-        .insert([payload])
+  // First save the enquiry in Supabase
+  const { error } = await supabase
+    .from('quote_enquiries')
+    .insert([payload])
 
-      if (error) {
-        setFeedback(`${t('enquiryError')} ${error.message}`)
-        return
-      }
+  if (error) {
+    setFeedback(`${t('enquiryError')} ${error.message}`)
+    return
+  }
 
-      setSuccess(true)
-      setFeedback(t('enquirySuccess'))
-      setForm(initialForm)
-    } catch {
-      setFeedback(t('enquiryError'))
-    } finally {
-      setSaving(false)
+  // Then send an email notification
+  const { error: emailError } = await supabase.functions.invoke(
+    'send-enquiry-email',
+    {
+      body: payload,
     }
+  )
+
+  setSuccess(true)
+
+  if (emailError) {
+    console.error('Email notification failed:', emailError)
+    setFeedback(
+      'Your enquiry was saved successfully, but the email notification could not be sent. Please contact us on WhatsApp.'
+    )
+  } else {
+    setFeedback('Thank you! Your enquiry has been submitted successfully.')
+  }
+
+  setForm(initialForm)
+} catch (error) {
+  console.error('Enquiry submission failed:', error)
+  setFeedback(t('enquiryError'))
+} finally {
+  setSaving(false)
+}
   }
 
   return (
