@@ -7,7 +7,7 @@ declare const Deno: {
 }
 
 const allowedOrigins = [
-  "https://mauli-international-website.vercel.app",
+  "https://mauli-international-website-qi2ofdkaa.vercel.app",
   "http://localhost:5173",
 ]
 
